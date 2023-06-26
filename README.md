@@ -11,7 +11,7 @@ Supports bilingual subtitles in multiple languages on coursera website videos (c
 5. Support subtitle size and transparency customization;
 
 ## Feature preview：
-Download the compressed package in code or release, decompress it, and use the chrome import plug-in to use it.
+Download the compressed package from code, decompress it, and use the chrome import plug-in to use it.
 ![image](https://github.com/immrk/supersub-translator-coursera/assets/100814424/ffd60cf2-d3cf-4ccf-906c-15ef4e39cf06)
 ![image](https://github.com/immrk/supersub-translator-coursera/assets/100814424/be9a4eb7-5ba9-470d-a49b-8fcf374c2caf)
 ![image](https://github.com/immrk/supersub-translator-coursera/assets/100814424/355e11dc-201d-48fd-bded-9503cf1862a4)
