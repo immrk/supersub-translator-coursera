@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SuperSub Translator - Coursera</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+
+  <body style="padding: 0%; margin: 0; width: 400px;">
+    <!-- 顶部标题栏区域 -->
+    <div class="title">
+      <p class="text">SuperSub Translator - Coursera</p>
+      <p class="introduction">A video subtitle translation tool for Coursera.org</p>
+    </div>
+    <!-- 功能栏 -->
+    <div class="body">
+      <!-- 翻译功能区 -->
+      <div class="row"><p>Supported: Coursera.org(current)</p></div>
+      <div class="row">
+        <p>Subtitle Lang:</p>
+        <select id="sublang" class="select">
+          <option value="">subtitle not recognized</option>
+        </select>
+      </div>
+      <div class="row">
+        <p>Target Lang:</p>
+        <select id="lang" class="select">
+          <option value="zh-CN">Chinese (Simplified)</option>
+          <option value="zh-TW">Chinese (Traditional)</option>
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="tr">Turkish</option>
+          <option value="es">Spanish</option>
+          <option value="ar">Arabic</option>
+          <option value="bg">Bulgarian</option>
+          <option value="ca">Catalan</option>
+          <option value="cs">Czech</option>
+          <option value="da">Danish</option>
+          <option value="nl">Dutch</option>
+          <option value="fi">Finnish</option>
+          <option value="el">Greek</option>
+          <option value="hi">Hindi</option>
+          <option value="hu">Hungarian</option>
+          <option value="id">Indonesian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="no">Norwegian</option>
+          <option value="pl">Polish</option>
+          <option value="ro">Romanian</option>
+          <option value="sv">Swedish</option>
+          <option value="th">Thai</option>
+          <option value="vi">Vietnamese</option>
+        </select>
+      </div>
+      <div class="row">
+        <p>translation service:</p>
+        <select id="service" class="select">
+          <option value="google">Google(Free)</option>
+          <option value="youdao" disabled>Youdao(Coming soon)</option>
+          <option value="subscribe" disabled>Subscribe(Coming soon)</option>
+        </select>
+      </div>
+      <div class="row">
+        <button id="translateBtn" class="button">Translate</button>
+      </div>
+      <!-- 附加功能区域 -->
+      <!-- 字幕缩放比例调整 -->
+      <div class="row">
+        <p>subtitle zoom(%)</p>
+        <select id="zoompercent" class="select">
+          <option value="100%">100%</option>
+          <option value="125%">125%</option>
+          <option value="75%">75%</option>
+          <option value="50%">50%</option>
+          <option value="25%">25%</option>
+
+        </select>
+      </div>
+      <!-- 字幕透明度调整 -->
+      <div class="row">
+        <p>Opacity(%)</p>
+        <select id="opacity" class="select">
+          <option value="100%">100%</option>
+          <option value="75%">75%</option>
+          <option value="50%">50%</option>
+          <option value="25%">25%</option>
+        </select>
+      </div>
+      <div class="row">
+        <button id="subtitleBtn" class="button">Style Set</button>
+      </div>
+    </div>
+    <script src="/popup.js"></script>
+  </body>
+</html>

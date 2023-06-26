@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "SuperSub-Coursera",
+  "version": "1.0.0",
+  "description": "cousera双语字幕;coursera bilingual subtitles;Coursera 이중 언어 자막;Coursera のバイリンガル字幕。Coursera zweisprachige Untertitel;sous-titres bilingues coursera ;двуязычные субтитры от Coursera;phụ đề song ngữ của khóa học;",
+  "content_scripts": [
+    {
+      "matches": ["*://www.coursera.org/*"],
+      "js": ["js/content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  },
+  "permissions": ["tabs", "storage", "activeTab"]
+}
