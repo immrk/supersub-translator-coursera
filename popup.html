@@ -5,13 +5,15 @@
     <link rel="stylesheet" href="popup.css" />
   </head>
 
-  <body style="padding: 0%; margin: 0; width: 400px;">
-    <!-- 顶部标题栏区域 -->
+  <body style="padding: 0%; margin: 0; width: 400px">
+    <!---------------------------- 顶部标题栏区域 ----------------------------->
     <div class="title">
       <p class="text">SuperSub Translator - Coursera</p>
-      <p class="introduction">A video subtitle translation tool for Coursera.org</p>
+      <p class="introduction">
+        A video subtitle translation tool for Coursera.org
+      </p>
     </div>
-    <!-- 功能栏 -->
+    <!------------------------------- 功能栏 ---------------------------------->
     <div class="body">
       <!-- 翻译功能区 -->
       <div class="row"><p>Supported: Coursera.org(current)</p></div>
@@ -78,7 +80,6 @@
           <option value="75%">75%</option>
           <option value="50%">50%</option>
           <option value="25%">25%</option>
-
         </select>
       </div>
       <!-- 字幕透明度调整 -->
@@ -93,6 +94,28 @@
       </div>
       <div class="row">
         <button id="subtitleBtn" class="button">Style Set</button>
+      </div>
+    </div>
+    <!-- 联系方式栏 -->
+    <!-- github -->
+    <div class="contact">
+      <div class="icon-container">
+        <a
+          href="https://github.com/immrk/supersub-translator-coursera"
+          target="_blank"
+        >
+          <img src="./static/github-fill.png" alt="" class="icon" />
+        </a>
+        <a href="https://www.buymeacoffee.com/royke" target="_blank">
+          <img src="./static/bmc-logo.svg" alt="SVG Image" class="icon" />
+        </a>
+      </div>
+      <div class="text">
+        You can get the latest version code from
+        <a href="https://github.com/immrk/supersub-translator-coursera"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Github</a>, and you can fund me to continue development through <a href="https://www.buymeacoffee.com/royke" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>.
       </div>
     </div>
     <script src="/popup.js"></script>
