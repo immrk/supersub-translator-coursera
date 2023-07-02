@@ -5,7 +5,7 @@
   "description": "cousera双语字幕;coursera bilingual subtitles;Coursera 이중 언어 자막;Coursera のバイリンガル字幕。Coursera zweisprachige Untertitel;sous-titres bilingues coursera ;двуязычные субтитры от Coursera;phụ đề song ngữ của khóa học;",
   "content_scripts": [
     {
-      "matches": ["*://www.coursera.org/*"],
+      "matches": ["https://www.coursera.org/*"],
       "js": ["js/content.js"]
     }
   ],
