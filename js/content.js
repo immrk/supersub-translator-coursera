@@ -46,7 +46,7 @@ async function openBilingual() {
         getTranslation_google(cuesTextList, result.sublang, result.lang, (translatedText) => {
             // console.log(translatedText)
             console.log("Goole tranlate is using...")
-            var translatedList = translatedText.split("z~~~z");
+            var translatedList = translatedText.split("/n/n");
             console.log(translatedList)
             translatedList.splice(-1, 1); // 移除数组的最后一个元素(因为最后一句末也有一个标识符)
             // 将翻译结果写入字幕文件中
@@ -55,13 +55,13 @@ async function openBilingual() {
                     for (let j = endSentence[i - 1] + 1; j <= endSentence[i]; j++) {
                         // 获取原始英文字幕的与译文拼接并加入换行符,去除标识符
                         let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('z~~~z', '') + '\n' + translatedList[i];
+                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i].replace(/\n/g, "");
                     }
                 } else {
                     for (let j = 0; j <= endSentence[i]; j++) {
                         // 获取原始英文字幕的与译文拼接并加入换行符，去除标识符
                         let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('z~~~z', '') + '\n' + translatedList[i];
+                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i].replace(/\n/g, "");
                     }
                 }
             }
@@ -108,16 +108,17 @@ function getTexts(cues) {
         for (let i = 0; i < cues.length; i++) {
             // console.log(cues[i].text)
             if (cues[i].text[cues[i].text.length - 1] == ".") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, ". z~~~z ");
+                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, ". /n/n ");
             } else if (cues[i].text[cues[i].text.length - 1] == "?") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "? z~~~z ");
+                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "? /n/n ");
             } else if (cues[i].text[cues[i].text.length - 1] == "!") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "! z~~~z ");
+                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "! /n/n ");
             }
 
         }
         // 去除换行符
-        cuesTextList += cues[i].text.replace(/\n/g, " ") + " ";
+        // cuesTextList += cues[i].text.replace(/\n/g, " ") + " ";
+        cuesTextList += cues[i].text + " ";
     }
     // console.log(cuesTextList)
     console.log(endSentence)
