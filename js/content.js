@@ -55,13 +55,13 @@ async function openBilingual() {
                     for (let j = endSentence[i - 1] + 1; j <= endSentence[i]; j++) {
                         // 获取原始英文字幕的与译文拼接并加入换行符,去除标识符
                         let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i].replace(/\n/g, "");
+                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i];
                     }
                 } else {
                     for (let j = 0; j <= endSentence[i]; j++) {
                         // 获取原始英文字幕的与译文拼接并加入换行符，去除标识符
                         let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i].replace(/\n/g, "");
+                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i];
                     }
                 }
             }
@@ -118,7 +118,7 @@ function getTexts(cues) {
         }
         // 去除换行符
         // cuesTextList += cues[i].text.replace(/\n/g, " ") + " ";
-        cuesTextList += cues[i].text + " ";
+        cuesTextList += cues[i].text.replace(/(?<!\n)\n(?!\n)/g, " ") + " "; // 匹配除了两个连续换行符之外的所有单个换行符
     }
     // console.log(cuesTextList)
     console.log(endSentence)
