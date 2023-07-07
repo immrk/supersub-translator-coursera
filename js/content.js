@@ -1,3 +1,15 @@
+// 目标页面加载时，自动获取缓存信息，若存在样式历史值则自动设置样式
+chrome.runtime.sendMessage({ method: "autosubstyle" }, function (response) {
+    // 在这里处理接收到的缓存数据
+    var zoompercent = response.zoompercent;
+    var opacity = response.opacity;
+    // 执行你的逻辑代码
+    console.log(zoompercent, opacity);
+    if (zoompercent) {
+        adjustSubtitle(zoompercent, opacity)
+    }
+});
+
 // 定义字幕信息获取函数-获取该页面视频具有几种语言字幕(用于插件 字幕语言 选择)
 async function getSubtitleLanguages(sendResponse) {
     let tracks = document.getElementsByTagName("track"); // 获取字幕信息
