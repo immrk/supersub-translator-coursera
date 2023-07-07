@@ -9,12 +9,11 @@
       "js": ["js/content.js"]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["js/background.js"],
-    "persistent": false
+    "service_worker": "js/background.js"
   },
   "permissions": ["tabs", "storage", "activeTab"]
 }
