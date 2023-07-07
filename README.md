@@ -11,7 +11,8 @@
 chrome translator plug-in for coursera;cousera双语字幕;coursera bilingual subtitles;Coursera 이중 언어 자막;Coursera のバイリンガル字幕。Coursera zweisprachige Untertitel;sous-titres bilingues coursera ;двуязычные субтитры от Coursera;phụ đề song ngữ của khóa học;
 </h3>
 
-Supports bilingual subtitles in multiple languages on coursera website videos (call google translation api to implement, please make sure that google translation service is available on your computer)
+Supports bilingual subtitles in multiple languages on coursera website videos (call google translation api to implement, 
+**!!Attention!!: Please Make Sure that Google Translation Service Is Available on your computer.**)
 
 ## Special features：
 1.Support automatic identification of coursera subtitle language;
