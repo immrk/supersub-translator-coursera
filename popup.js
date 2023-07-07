@@ -52,6 +52,8 @@ document.addEventListener(
         // 将数据存入插件缓存用于下次调用
         localStorage.setItem('zoompercent', zoompercent);
         localStorage.setItem('opacity', opacity);
+        // 将数据存入浏览器缓存，用于background.js调用
+        chrome.storage.sync.set({ zoompercent: zoompercent, opacity: opacity });
         subtitlerequest(zoompercent, opacity)
       },
       false
@@ -128,11 +130,6 @@ function getlanginfo() {
       );
     }
   );
-}
-
-// 字幕翻译请求 函数
-function translaterequest(){
-  
 }
 
 // 字幕样式修改请求 函数
