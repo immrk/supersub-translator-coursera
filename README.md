@@ -1,4 +1,4 @@
-<h1 align="center">Supersub-Translator-Coursera<h1>
+<h1 align="center">Supersub-Translator for Coursera<h1>
 <div align="center">
 
 [![web](https://img.shields.io/badge/web-official-blue.svg)](https://www.kworlds.cn/pages/supersub.html)
