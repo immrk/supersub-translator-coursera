@@ -64,13 +64,13 @@ async function openBilingual() {
                 for (let j = endSentence[i - 1] + 1; j <= endSentence[i]; j++) {
                     // 获取原始英文字幕的与译文拼接并加入换行符,去除标识符
                     let originalText = cues[j].text;
-                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i];
+                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i].replace(" ", "");
                 }
             } else {
                 for (let j = 0; j <= endSentence[i]; j++) {
                     // 获取原始英文字幕的与译文拼接并加入换行符，去除标识符
                     let originalText = cues[j].text;
-                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i];
+                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i].replace(" ", "");
                 }
             }
         }
@@ -107,13 +107,13 @@ function getTexts(cues) {
         // console.log(cues[i].text)
         // 通过字符].!?判断句子最后一位，来划分句子
         if (cues[i].text[cues[i].text.length - 1] == ".") {
-            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "./n/n");
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, ". /n/n ");
             endSentence.push(i);
         } else if (cues[i].text[cues[i].text.length - 1] == "?") {
-            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "?/n/n");
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "? /n/n ");
             endSentence.push(i);
         } else if (cues[i].text[cues[i].text.length - 1] == "!") {
-            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "!/n/n");
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "! /n/n ");
             endSentence.push(i);
         }
         // 去除换行符
