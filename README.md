@@ -14,11 +14,11 @@ chrome translator plug-in for coursera;cousera双语字幕;coursera bilingual su
 Supports bilingual subtitles in multiple languages on coursera website videos (call google translation api to implement, please make sure that google translation service is available on your computer)
 
 ## Special features：
-1. Support automatic identification of coursera subtitle language;
-2. Support the selection of the original subtitle language and translation target language, and support most of the languages supported by Google Translate;
-3. Simultaneously display bilingual subtitles;
-4. Call Google Translate for free;
-5. Support subtitle size and transparency customization;
+1.Support automatic identification of coursera subtitle language;
+2.Support the selection of the original subtitle language and translation target language, and support most of the languages supported by Google Translate;
+3.Simultaneously display bilingual subtitles;
+4.Call Google Translate for free;
+5.Support subtitle size and transparency customization;
 
 ## Download Tutorial:
 1.Download the repository code as a compressed archive.
