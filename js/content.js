@@ -17,6 +17,8 @@ async function openBilingual() {
     console.log("Translate ", result.sublang, " to ", result.lang);
     // 从网页获取所包含字幕信息
     let tracks = document.getElementsByTagName("track"); // 获取字幕信息
+    // 赋值翻译后的文本列
+    let googletranslatedList = [];
     // 将对应语言字幕数据赋值为 sub
     let sub // 原始字幕信息
     if (tracks.length) {
@@ -40,33 +42,38 @@ async function openBilingual() {
         }
         console.log("cueslength:", cues.length)
         // 调用字幕文本句子划分函数
-        var [cuesTextList, endSentence] = getTexts(cues);
-        console.log(cuesTextList)
-        // 调用谷歌翻译函数，获取字符翻译值(此处原理为将所有文本一次性翻译后再分割)
-        getTranslation_google(cuesTextList, result.sublang, result.lang, (translatedText) => {
-            // console.log(translatedText)
-            console.log("Goole tranlate is using...")
-            var translatedList = translatedText.split("/n/n");
-            console.log(translatedList)
-            translatedList.splice(-1, 1); // 移除数组的最后一个元素(因为最后一句末也有一个标识符)
-            // 将翻译结果写入字幕文件中
-            for (let i = 0; i < endSentence.length; i++) {
-                if (i != 0) {
-                    for (let j = endSentence[i - 1] + 1; j <= endSentence[i]; j++) {
-                        // 获取原始英文字幕的与译文拼接并加入换行符,去除标识符
-                        let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i];
+        var [sentencelist, endSentence] = getTexts(cues);
+        for (let i = 0; i < sentencelist.length; i++) {
+            // 该函数为异步函数，故需要增加promise，以保证异步操作执行完成，使googletranslatedList正确获得值；
+            await new Promise((resolve) => {
+                getTranslation_google(sentencelist[i], result.sublang, result.lang, (translatedText) => {
+                    var translatedList = translatedText.split("/n/n");
+                    translatedList.splice(-1, 1);
+                    for (let i = 0; i < translatedList.length; i++) {
+                        googletranslatedList.push(translatedList[i]);
                     }
-                } else {
-                    for (let j = 0; j <= endSentence[i]; j++) {
-                        // 获取原始英文字幕的与译文拼接并加入换行符，去除标识符
-                        let originalText = cues[j].text;
-                        cues[j].text = originalText.replace('/n/n', '') + '\n' + translatedList[i];
-                    }
+                    resolve();
+                });
+            });
+        };
+        console.log(googletranslatedList);
+        console.log(googletranslatedList.length);
+        // 将翻译结果注入字幕中
+        for (let i = 0; i < googletranslatedList.length; i++) {
+            if (i != 0) {
+                for (let j = endSentence[i - 1] + 1; j <= endSentence[i]; j++) {
+                    // 获取原始英文字幕的与译文拼接并加入换行符,去除标识符
+                    let originalText = cues[j].text;
+                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i];
+                }
+            } else {
+                for (let j = 0; j <= endSentence[i]; j++) {
+                    // 获取原始英文字幕的与译文拼接并加入换行符，去除标识符
+                    let originalText = cues[j].text;
+                    cues[j].text = originalText.replace('/n/n', '') + '\n' + googletranslatedList[i];
                 }
             }
-            console.log("Translate completely！")
-        })
+        }
     }
 }
 
@@ -91,38 +98,48 @@ async function getStorageData(keys) {
 // 获取原始字幕(并划分句子，打赏标签)
 function getTexts(cues) {
     // 各句尾打上标签并记录序号
-    let cuesTextList = "";
+    let cuesText = '';
     // 整句判断,通过字符.!?判断句子最后一位，来划分句子
-    var endSentence = [];
-    for (let i = 0; i < cues.length; i++) {
-        for (let j = 0; j < cues[i].text.length; j++) {
-            if ((cues[i].text[j] === "."|| cues[i].text[j] === "?"|| cues[i].text[j] === "!")
-                && cues[i].text[j + 1] == undefined) {
-                endSentence.push(i);
-            }
-        }
-    }
+    let endSentence = [];
+    let cuesTextList = [];
+    let sentencelist = [];
     for (let i = 0; i < cues.length; i++) {
         // console.log(cues[i].text)
         // 通过字符].!?判断句子最后一位，来划分句子
-        for (let i = 0; i < cues.length; i++) {
-            // console.log(cues[i].text)
-            if (cues[i].text[cues[i].text.length - 1] == ".") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, ". /n/n ");
-            } else if (cues[i].text[cues[i].text.length - 1] == "?") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "? /n/n ");
-            } else if (cues[i].text[cues[i].text.length - 1] == "!") {
-                cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "! /n/n ");
-            }
-
+        if (cues[i].text[cues[i].text.length - 1] == ".") {
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "./n/n");
+            endSentence.push(i);
+        } else if (cues[i].text[cues[i].text.length - 1] == "?") {
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "?/n/n");
+            endSentence.push(i);
+        } else if (cues[i].text[cues[i].text.length - 1] == "!") {
+            cues[i].text = cues[i].text.replaceAt(cues[i].text.length - 1, "!/n/n");
+            endSentence.push(i);
         }
         // 去除换行符
         // cuesTextList += cues[i].text.replace(/\n/g, " ") + " ";
-        cuesTextList += cues[i].text.replace(/(?<!\n)\n(?!\n)/g, " ") + " "; // 匹配除了两个连续换行符之外的所有单个换行符
+        cuesText += cues[i].text.replace(/(?<!\n)\n(?!\n)/g, ""); // 匹配除了两个连续换行符之外的所有单个换行符
     }
-    // console.log(cuesTextList)
+    // google翻译api单词翻译最多支持5000字符，故调用分割函数进行划分
+    // 将文本划分成整句，并保留标识符
+    cuesTextList = cuesText.split("/n/n");
+    for (let i = 0; i < cuesTextList.length - 1; i++) {
+        cuesTextList[i] = cuesTextList[i] + "/n/n"
+    }
+    cuesTextList.splice(-1, 1); // 移除数组的最后一个元素(因为最后一句末也有一个标识符)
+    // 将每5000个字符的整句划分为一串文本用于翻译
+    for (let i = 0; i < cuesTextList.length; i++) {
+        if (sentencelist.length > 0 && sentencelist[sentencelist.length - 1].length + cuesTextList[i].length < 5000) {
+            sentencelist[sentencelist.length - 1] += cuesTextList[i];
+        } else {
+            sentencelist.push(cuesTextList[i])
+        }
+    }
+    // console.log(cuesText)
+    console.log(cuesTextList)
+    console.log(sentencelist)
     console.log(endSentence)
-    return [cuesTextList, endSentence];
+    return [sentencelist, endSentence];
 }
 
 // 谷歌翻译API调用函数
