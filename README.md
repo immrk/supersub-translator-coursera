@@ -1,7 +1,7 @@
 <h1 align="center">Supersub-Translator for Coursera<h1>
 <div align="center">
 
-[![web](https://img.shields.io/badge/web-official-blue.svg)](https://www.kworlds.cn/pages/supersub.html)
+[![web](https://img.shields.io/badge/web-official-blue.svg)](https://kworlds.cn/pages/supersub.html)
 [![community](https://img.shields.io/badge/discord-community-yellow.svg)](https://discord.gg/sNCxsfEE)
 [![group](https://img.shields.io/badge/telegram-usergroup-purple.svg)](https://t.me/+b2QbOE4kOOVkZmI1)
 [![License](https://img.shields.io/github/license/immrk/supersub-translator-coursera)](https://github.com/immrk/supersub-translator-coursera/main/LICENSE)
